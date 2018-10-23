@@ -315,7 +315,7 @@ function animate() {
 
 
    // plane.rotation.x = .1;
-    plane.rotation.set(.28,-4.7,0)
+   // plane.rotation.set(.28,-4.7,0)
    // plane.rotation.z += 0.01;
 
 
@@ -338,7 +338,7 @@ function render() {
 
 
    // plane.rotation.y += 2-Math.random()*.02
-    plane.position.x+=plane.position.x*(accGravity/10)
+    plane.position.x+=(accGravity/100)
     // plane.position.y+=1+Math.random()*-2
 
     // plane.rotation.set(.2,-5.5,0)
