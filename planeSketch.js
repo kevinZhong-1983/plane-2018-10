@@ -271,7 +271,7 @@ function init() {
             alpha: true,
             // 开启抗锯齿，但这样会降低性能。
             // 不过，由于我们的项目基于低多边形的，那还好 :)
-            antialias: true
+            antialias: false
         }
 );
 
