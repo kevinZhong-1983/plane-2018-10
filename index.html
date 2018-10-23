@@ -44,14 +44,14 @@
     <script src="shared/CanvasRenderer.js"></script>
     <script src="shared/OrbitControls.js"></script>
     <script src="shared/Plane.js"></script>
-    <script src="planeSketch.js"></script>
+
 
     <!--//fsfagdfgdsfd-->
 
     <script>
 
 
-        var acc=0
+        var accGravity=0
 
         function orientationHandler(event) {
 
@@ -75,7 +75,7 @@
             // document.getElementById("z").innerHTML = acc.z;
             accGravity = event.accelerationIncludingGravity;
 
-            document.getElementById('txt').innerHTML=Math.floor(accGravity.x)+":"+Math.floor(accGravity.y)
+
             // document.getElementById("xg").innerHTML = accGravity.x;
             // document.getElementById("yg").innerHTML = accGravity.y;
             // document.getElementById("zg").innerHTML = accGravity.z;
@@ -99,6 +99,8 @@
 
 
     </script>
+
+    <script src="planeSketch.js"></script>
 
 </body>
 
