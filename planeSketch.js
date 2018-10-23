@@ -338,13 +338,13 @@ function render() {
 
 
    // plane.rotation.y += 2-Math.random()*.02
-    document.getElementById('txt').innerHTML="x:"+Math.floor(accGravity.x)+"y:"+Math.floor(accGravity.y)+"id=7"
+    document.getElementById('txt').innerHTML="x:"+Math.floor(accGravity.x)+"y:"+Math.floor(accGravity.y)+"id=8"
     plane.position.x+=(accGravity.x/10)
-    plane.position.z+=(accGravity.z/10)
+
     //plane.position.y+=(Math.random()*(0.05))
     // plane.position.y+=1+Math.random()*-2
 
-    // plane.rotation.set(.2,-5.5,0)
+     plane.rotation.set(.2,accGravity.x/10,0)
 
     renderer.render(scene, camera);
 
