@@ -338,7 +338,7 @@ function render() {
 
 
    // plane.rotation.y += 2-Math.random()*.02
-    document.getElementById('txt').innerHTML=Math.floor(accGravity.x)+":"+Math.floor(accGravity.y)
+    document.getElementById('txt').innerHTML="x:"+Math.floor(accGravity.x)+"y:"+Math.floor(accGravity.y)
     plane.position.x+=(accGravity/100)
     // plane.position.y+=1+Math.random()*-2
 
