@@ -264,12 +264,27 @@ function init() {
     plane.geometry.center()
 
 
-    renderer = new THREE.WebGLRenderer();
+    renderer = new THREE.WebGLRenderer(
+
+        {
+            // 在 css 中设置背景色透明显示渐变色
+            alpha: true,
+            // 开启抗锯齿，但这样会降低性能。
+            // 不过，由于我们的项目基于低多边形的，那还好 :)
+            antialias: true
+        }
+);
 
 
 
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+    renderer.shadowMap.enabled = true;
+
+    // 在 HTML 创建的容器中添加渲染器的 DOM 元素
+    container = document.getElementById('world');
+    container.appendChild(renderer.domElement);
+
     document.addEventListener('mousemove', onDocumentMouseMove, false);
     document.body.appendChild(renderer.domElement);
     //
@@ -309,7 +324,7 @@ function animate() {
     if(vv==150){
 
         //renderer.setClearColor(Math.random()*0xCCCCFF, 1);
-        plane.material.color.set(Math.random()*0xCCCCFF)
+        //plane.material.color.set(Math.random()*0xCCCCFF)
         vv=0
     }
 
@@ -338,7 +353,7 @@ function render() {
 
 
    // plane.rotation.y += 2-Math.random()*.02
-    document.getElementById('txt').innerHTML="x:"+Math.floor(accGravity.x)+"y:"+Math.floor(accGravity.y)+"id=12"
+    document.getElementById('txt').innerHTML="x:"+Math.floor(accGravity.x)+"y:"+Math.floor(accGravity.y)+"id=13"
     plane.position.x+=(accGravity.x/10)
 
     //plane.position.y+=(Math.random()*(0.05))
