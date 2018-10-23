@@ -344,7 +344,7 @@ function render() {
     //plane.position.y+=(Math.random()*(0.05))
     // plane.position.y+=1+Math.random()*-2
 
-     plane.rotation.set(.2,accGravity.x/10,0)
+     plane.rotation.set(.2,-5.5+accGravity.x/10,0)
 
     renderer.render(scene, camera);
 
