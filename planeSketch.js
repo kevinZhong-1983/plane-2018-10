@@ -282,8 +282,8 @@ function init() {
     renderer.shadowMap.enabled = true;
 
     // 在 HTML 创建的容器中添加渲染器的 DOM 元素
-    container = document.getElementById('world');
-    container.appendChild(renderer.domElement);
+   // container = document.getElementById('world');
+    //container.appendChild(renderer.domElement);
 
     document.addEventListener('mousemove', onDocumentMouseMove, false);
     document.body.appendChild(renderer.domElement);
