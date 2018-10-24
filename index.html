@@ -28,6 +28,7 @@
             position: absolute;
             top: 0;
             left: 0;
+            z-index: 2;
 
         }
     #world {
@@ -36,16 +37,18 @@
         height: 100%;
         overflow: hidden;
         background: linear-gradient(#bedcf4, #5c9fd6);
+        z-index: 1;
     }
     </style>
 </head>
 
 <body>
-    <!--<div id="world"></div>-->
+    <div id="world"></div>
+    <div id="txt">00</div>
     <div id="container"></div>
     <!-- <div id="info"><a href="http://threejs.org" target="_blank">three.js</a> - birds demo</div> -->
 
-    <div id="txt">00</div>
+
 
 
 
@@ -107,8 +110,10 @@
     <script src="shared/Projector.js"></script>
     <script src="shared/CanvasRenderer.js"></script>
     <script src="shared/OrbitControls.js"></script>
+    <script src="shared/tween.min.js"></script>
     <script src="shared/Plane.js"></script>
     <script src="planeSketch.js"></script>
+
 
 </body>
 

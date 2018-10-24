@@ -169,6 +169,39 @@ var Boid = function() {
     }
 }
 
+var Colors = {
+    red:0xf25346,
+    white:0xd8d0d1,
+    pink:0xF5986E,
+    brown:0x59332e,
+    brownDark:0x23190f,
+    blue:0x68c3c0,
+};
+
+var Cloud = function(){
+    this.mesh = new THREE.Object3D();
+    this.mesh.name = "cloud";
+    var geom = new THREE.CubeGeometry(20,20,20);
+    var mat = new THREE.MeshPhongMaterial({
+        color:Colors.white,
+    });
+
+    var nBlocs = 3+Math.floor(Math.random()*3);
+    for (var i=0; i<nBlocs; i++ ){
+        var m = new THREE.Mesh(geom.clone(), mat);
+        m.position.x = i*15;
+        m.position.y = Math.random()*10;
+        m.position.z = Math.random()*10;
+        m.rotation.z = Math.random()*Math.PI*2;
+        m.rotation.y = Math.random()*Math.PI*2;
+        var s = .1 + Math.random()*.9;
+        m.scale.set(s,s,s);
+        m.castShadow = true;
+        m.receiveShadow = true;
+        this.mesh.add(m);
+    }
+}
+
 var SCREEN_WIDTH = window.innerWidth,
     SCREEN_HEIGHT = window.innerHeight,
     SCREEN_WIDTH_HALF = SCREEN_WIDTH / 2,
@@ -178,6 +211,8 @@ var boid, boids;
 var planeMat;
 var sea;
 var vv=0
+var sky;
+var clouds = [];
 
 init();
 animate();
@@ -185,21 +220,26 @@ animate();
 
 function init() {
 
-    var Colors = {
-        red:0xf25346,
-        white:0xd8d0d1,
-        pink:0xF5986E,
-        brown:0x59332e,
-        brownDark:0x23190f,
-        blue:0x68c3c0,
-    };
+
 
     camera = new THREE.PerspectiveCamera(75, SCREEN_WIDTH / SCREEN_HEIGHT, 1, 10000);
     camera.position.z = 50;
+
+    // add a skybox background
+    var cubeTextureLoader = new THREE.CubeTextureLoader();
+    cubeTextureLoader.setPath( 'images/' );
+    var cubeTexture = cubeTextureLoader.load( [
+        'px.jpg', 'nx.jpg',
+        'py.jpg', 'ny.jpg',
+        'pz.jpg', 'nz.jpg',
+    ] );
+
+
+
     scene = new THREE.Scene();
     scene.fog = new THREE.Fog( 0xeeeeff, 0, 950 );
 
-
+    scene.background = cubeTexture;
 
 
 
@@ -232,20 +272,47 @@ function init() {
 
 
 
-    // for (var i = 0; i < 1; i++) {
-    //     boid = boids[i] = new Boid();
-    //     boid.position.x = 100+Math.random() * 100;
-    //     boid.position.y = 100+Math.random() * 800;
-    //     boid.position.z = Math.random() * 50;
-    //     boid.velocity.x = 100+Math.random() * 200 - 1;
-    //     boid.velocity.y = 100+Math.random() * 1200 - 1;
-    //     boid.velocity.z = Math.random() * 20 - 1;
-    //     boid.setAvoidWalls(true);
-    //     boid.setWorldSize(800, 400, 400);
-    //     plane = planes[i] = new THREE.Mesh(new Plane(), planeMat);
-    //     plane.geometry.scale(3, 3, 3);
-    //     scene.add(plane);
-    // }
+
+
+// 定义一个天空对象
+//     Sky = function(){
+//         this.mesh = new THREE.Object3D();
+//         this.nClouds = 20;
+//
+//         var stepAngle = 0
+//         for(var i=0; i<this.nClouds; i++){
+//             var c = new Cloud();
+//             clouds.push(c);
+//            var a = stepAngle*i;
+//            var h = 350 + Math.random()*200;
+//             c.mesh.position.y = 0;
+//             c.mesh.position.x = 0;
+//             c.mesh.position.z = -400-Math.random()*400;
+//             c.mesh.rotation.z = a + Math.PI/2;
+//            var s = 1+Math.random()*1;
+//            c.mesh.scale.set(s,s,s);
+//             this.mesh.add(c.mesh);
+//         }
+//     }
+
+// 现在我们实例化天空对象，而且将它放置在屏幕中间稍微偏下的位置。
+
+
+
+   // function createSky(){
+
+
+
+
+        // sky = new Sky();
+        // sky.mesh.position.y = -300;
+        // scene.add(sky.mesh);
+
+
+
+    //}
+
+    //createSky()
 
     boid= new Boid();
     boid.position.x = 0;
@@ -264,37 +331,24 @@ function init() {
     plane.geometry.center()
 
 
-    renderer = new THREE.WebGLRenderer(
 
-        {
-            // 在 css 中设置背景色透明显示渐变色
-            //alpha: true,
-            // 开启抗锯齿，但这样会降低性能。
-            // 不过，由于我们的项目基于低多边形的，那还好 :)
-            antialias: false
-        }
-);
-
-
-
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
     renderer.shadowMap.enabled = true;
+    container = document.getElementById('world');
+    container.appendChild(renderer.domElement);
 
-    // 在 HTML 创建的容器中添加渲染器的 DOM 元素
-   // container = document.getElementById('world');
-    //container.appendChild(renderer.domElement);
 
     document.addEventListener('mousemove', onDocumentMouseMove, false);
-    document.body.appendChild(renderer.domElement);
+    //document.body.appendChild(renderer.domElement);
     //
     window.addEventListener('resize', onWindowResize, false);
 
 
     // Controls
-    // var controls = new THREE.OrbitControls( camera, renderer.domElement );
-    // controls.target.set( 0, 1, 0 );
-    // controls.update();
+    var controls = new THREE.OrbitControls( camera, renderer.domElement );
+    controls.target.set( 0, 1, 0 );
+    controls.update();
 }
 
 function onWindowResize() {
@@ -312,6 +366,8 @@ function onDocumentMouseMove(event) {
     // }
 
 
+
+
 }
 //
 function animate() {
@@ -319,19 +375,69 @@ function animate() {
     render();
     //sea.moveWaves();
 
+
     vv++
 
-    if(vv==150){
+    if(vv==10){
 
         //renderer.setClearColor(Math.random()*0xCCCCFF, 1);
         //plane.material.color.set(Math.random()*0xCCCCFF)
+
+
+        var c = new Cloud();
+        clouds.push(c);
+        c.mesh.position.y = 100+Math.random()*-200;
+        c.mesh.position.x = Math.random()*100;
+        c.mesh.position.z = -6000;
+        c.mesh.scale.set(2,2,2);
+        scene.add(c.mesh);
+
+        //console.log("///")
+
+        new TWEEN.Tween( c.mesh.position )
+                .delay(100)
+                .to( { x: 2000+Math.random() * -4000, y: 2000+Math.random() * -4000 , z: 4000 }, 5000 )
+                .start();
+
         vv=0
     }
 
 
+    for(var i=0;i<clouds.length;i++){
+
+        if(clouds[i].mesh.position.z==4000){
+
+            scene.remove(clouds[i].mesh);
+            clouds.splice(i,1)
+        }
+
+    }
+
+    //console.log(clouds.length)
+
+
+
+    // for(var i=0;i<clouds.length;i++){
+    //
+    //     //clouds[i].mesh.position.x+=1
+    //     new TWEEN.Tween( clouds[i].mesh.position )
+    //         .delay(i/100)
+    //         .to( { x: Math.random() * -4000, y: Math.random() * 1000 , z: Math.random() * 4000 }, 10000 )
+    //         .start();
+    //
+    // }
+
+    //sky.mesh.position.x+= 1.01;
+    //sky.mesh.position.x += 1.01;
+    //sky.mesh.position.y += 1.01;
    // plane.rotation.x = .1;
    // plane.rotation.set(.28,-4.7,0)
    // plane.rotation.z += 0.01;
+
+
+
+
+
 
 
 
@@ -350,7 +456,7 @@ function render() {
     //
     // }
 
-
+    TWEEN.update();
 
    // plane.rotation.y += 2-Math.random()*.02
     document.getElementById('txt').innerHTML="x:"+Math.floor(accGravity.x)+"y:"+Math.floor(accGravity.y)+"id=13"
@@ -359,7 +465,7 @@ function render() {
     //plane.position.y+=(Math.random()*(0.05))
     // plane.position.y+=1+Math.random()*-2
 
-     plane.rotation.set(.3,-4.7+accGravity.x/10,0)
+    plane.rotation.set(.3,-4.7+accGravity.x/10,0)
 
     renderer.render(scene, camera);
 
