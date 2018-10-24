@@ -235,6 +235,7 @@ function init() {
     ] );
 
 
+    //cubeTexture.rotation=90
 
     scene = new THREE.Scene();
     scene.fog = new THREE.Fog( 0xeeeeff, 0, 950 );
@@ -378,7 +379,7 @@ function animate() {
 
     vv++
 
-    if(vv==10){
+    if(vv==20){
 
         //renderer.setClearColor(Math.random()*0xCCCCFF, 1);
         //plane.material.color.set(Math.random()*0xCCCCFF)
@@ -389,7 +390,7 @@ function animate() {
         c.mesh.position.y = 100+Math.random()*-200;
         c.mesh.position.x = Math.random()*100;
         c.mesh.position.z = -6000;
-        c.mesh.scale.set(2,2,2);
+        c.mesh.scale.set(4,4,4);
         scene.add(c.mesh);
 
         //console.log("///")
