@@ -178,29 +178,29 @@ var Colors = {
     blue:0x68c3c0,
 };
 
-var Cloud = function(){
-    this.mesh = new THREE.Object3D();
-    this.mesh.name = "cloud";
-    var geom = new THREE.CubeGeometry(20,20,20);
-    var mat = new THREE.MeshPhongMaterial({
-        color:Colors.white,
-    });
-
-    var nBlocs = 3+Math.floor(Math.random()*3);
-    for (var i=0; i<nBlocs; i++ ){
-        var m = new THREE.Mesh(geom.clone(), mat);
-        m.position.x = i*15;
-        m.position.y = Math.random()*10;
-        m.position.z = Math.random()*10;
-        m.rotation.z = Math.random()*Math.PI*2;
-        m.rotation.y = Math.random()*Math.PI*2;
-        var s = .1 + Math.random()*.9;
-        m.scale.set(s,s,s);
-        m.castShadow = true;
-        m.receiveShadow = true;
-        this.mesh.add(m);
-    }
-}
+// var Cloud = function(){
+//     this.mesh = new THREE.Object3D();
+//     this.mesh.name = "cloud";
+//     var geom = new THREE.CubeGeometry(20,20,20);
+//     var mat = new THREE.MeshPhongMaterial({
+//         color:Colors.white,
+//     });
+//
+//     var nBlocs = 3+Math.floor(Math.random()*3);
+//     for (var i=0; i<nBlocs; i++ ){
+//         var m = new THREE.Mesh(geom.clone(), mat);
+//         m.position.x = i*15;
+//         m.position.y = Math.random()*10;
+//         m.position.z = Math.random()*10;
+//         m.rotation.z = Math.random()*Math.PI*2;
+//         m.rotation.y = Math.random()*Math.PI*2;
+//         var s = .1 + Math.random()*.9;
+//         m.scale.set(s,s,s);
+//         m.castShadow = true;
+//         m.receiveShadow = true;
+//         this.mesh.add(m);
+//     }
+// }
 
 var SCREEN_WIDTH = window.innerWidth,
     SCREEN_HEIGHT = window.innerHeight,
@@ -214,36 +214,104 @@ var vv=0
 var sky;
 var clouds = [];
 
+var start_time = Date.now();
+
+var windowHalfX = window.innerWidth / 2;
+var windowHalfY = window.innerHeight / 2;
+var container;
+var mesh, geometry, material;
+
+
+
 init();
-animate();
+//animate();
 
 
 function init() {
 
+    container = document.body;
+    var canvas = document.createElement( 'canvas' );
+    canvas.width = 32;
+    canvas.height = window.innerHeight;
+
+    var context = canvas.getContext( '2d' );
+
+    var gradient = context.createLinearGradient( 0, 0, 0, canvas.height );
+    gradient.addColorStop(0, "#1e4877");
+    gradient.addColorStop(0.5, "#4584b4");
+
+    context.fillStyle = gradient;
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    container.style.background = 'url(' + canvas.toDataURL('image/png') + ')';
+    container.style.backgroundSize = '32px 100%';
 
 
-    camera = new THREE.PerspectiveCamera(75, SCREEN_WIDTH / SCREEN_HEIGHT, 1, 10000);
-    camera.position.z = 50;
 
-    // add a skybox background
-    var cubeTextureLoader = new THREE.CubeTextureLoader();
-    cubeTextureLoader.setPath( 'images/' );
-    var cubeTexture = cubeTextureLoader.load( [
-        'px.jpg', 'nx.jpg',
-        'py.jpg', 'ny.jpg',
-        'pz.jpg', 'nz.jpg',
-    ] );
+     camera = new THREE.PerspectiveCamera(75, SCREEN_WIDTH / SCREEN_HEIGHT, 1, 10000);
+     camera.position.z = 8000;
+
+    // camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 1, 3000 );
+    // camera.position.z = 6000;
 
 
-    //cubeTexture.rotation=90
 
     scene = new THREE.Scene();
     scene.fog = new THREE.Fog( 0xeeeeff, 0, 950 );
 
-    scene.background = cubeTexture;
+    geometry = new THREE.Geometry();
+
+    var texture = new THREE.TextureLoader().load( 'images/cloud.png', animate );
+    texture.magFilter = THREE.LinearMipMapLinearFilter;
+    texture.minFilter = THREE.LinearMipMapLinearFilter;
+
+    var fog = new THREE.Fog( 0x4584b4, - 100, 3000 );
+
+    material = new THREE.ShaderMaterial( {
+
+        uniforms: {
+
+            "map": { type: "t", value: texture },
+            "fogColor" : { type: "c", value: fog.color },
+            "fogNear" : { type: "f", value: fog.near },
+            "fogFar" : { type: "f", value: fog.far },
+
+        },
+        vertexShader: document.getElementById( 'vs' ).textContent,
+        fragmentShader: document.getElementById( 'fs' ).textContent,
+        depthWrite: false,
+        depthTest: true,
+        transparent: true
+
+    } );
+
+    var cloud = new THREE.Mesh( new THREE.PlaneGeometry( 64, 64 ) );
+
+    for ( var i = 0; i < 8000; i++ ) {
+
+        cloud.position.x = Math.random() * 1000 - 500;
+        cloud.position.y = - Math.random() * Math.random() * 200 +50;
+        cloud.position.z = i;
+        cloud.rotation.z = Math.random() * Math.PI;
+        cloud.scale.x = cloud.scale.y = Math.random() * Math.random() * 1.5 + 0.5;
 
 
+        cloud.updateMatrix();
 
+        geometry.merge(cloud.geometry, cloud.matrix);
+
+    }
+
+    mesh = new THREE.Mesh( geometry, material );
+    //mesh.position.z = 0;
+    scene.add( mesh );
+
+    // mesh = new THREE.Mesh( geometry, material );
+    //
+    // scene.add( mesh );
+
+
+    //灯光
     var light = new THREE.HemisphereLight(0xFFFFFF, 0xFFFFFF, 0.5); //0xeeeeff
     light.position.set(0.5, 1, 0.75);
     scene.add(light);
@@ -325,19 +393,19 @@ function init() {
     boid.setAvoidWalls(true);
     boid.setWorldSize(400, 400, 400);
     plane = new THREE.Mesh(new Plane(), planeMat);
-    //plane.geometry.scale(18, 18, 18);
-    scene.add(plane);
-
+    plane.geometry.scale(2, 2, 2);
+    //plane.position.z =0
     plane.rotation.set(.3,-4.7,0)
     plane.geometry.center()
-
+    scene.add(plane);
 
 
     renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
     renderer.shadowMap.enabled = true;
-    container = document.getElementById('world');
-    container.appendChild(renderer.domElement);
+    // container = document.getElementById('world');
+    // container.appendChild(renderer.domElement);
+    container.appendChild( renderer.domElement );
 
 
     document.addEventListener('mousemove', onDocumentMouseMove, false);
@@ -373,46 +441,57 @@ function onDocumentMouseMove(event) {
 //
 function animate() {
     requestAnimationFrame(animate);
-    render();
+
     //sea.moveWaves();
 
 
+
+    position = ( ( Date.now() - start_time ) * 0.13 ) % 8000;
+
+    //camera.position.x += ( mouseX - camera.position.x ) * 0.1;
+    //camera.position.y += ( - mouseY - camera.position.y ) * 0.1;
+    mesh.position.z =0+position;
+    plane.position.z =7940;
+
+    //console.log(mesh.position.z)
+    render();
+
     vv++
 
-    if(vv==20){
-
-        //renderer.setClearColor(Math.random()*0xCCCCFF, 1);
-        //plane.material.color.set(Math.random()*0xCCCCFF)
-
-
-        var c = new Cloud();
-        clouds.push(c);
-        c.mesh.position.y = 100+Math.random()*-200;
-        c.mesh.position.x = Math.random()*100;
-        c.mesh.position.z = -6000;
-        c.mesh.scale.set(4,4,4);
-        scene.add(c.mesh);
-
-        //console.log("///")
-
-        new TWEEN.Tween( c.mesh.position )
-                .delay(100)
-                .to( { x: 2000+Math.random() * -4000, y: 2000+Math.random() * -4000 , z: 4000 }, 5000 )
-                .start();
-
-        vv=0
-    }
-
-
-    for(var i=0;i<clouds.length;i++){
-
-        if(clouds[i].mesh.position.z==4000){
-
-            scene.remove(clouds[i].mesh);
-            clouds.splice(i,1)
-        }
-
-    }
+    // if(vv==20){
+    //
+    //     //renderer.setClearColor(Math.random()*0xCCCCFF, 1);
+    //     //plane.material.color.set(Math.random()*0xCCCCFF)
+    //
+    //
+    //     var c = new Cloud();
+    //     clouds.push(c);
+    //     c.mesh.position.y = 100+Math.random()*-200;
+    //     c.mesh.position.x = Math.random()*100;
+    //     c.mesh.position.z = -6000;
+    //     c.mesh.scale.set(4,4,4);
+    //     scene.add(c.mesh);
+    //
+    //     //console.log("///")
+    //
+    //     new TWEEN.Tween( c.mesh.position )
+    //             .delay(100)
+    //             .to( { x: 2000+Math.random() * -4000, y: 2000+Math.random() * -4000 , z: 4000 }, 5000 )
+    //             .start();
+    //
+    //     vv=0
+    // }
+    //
+    //
+    // for(var i=0;i<clouds.length;i++){
+    //
+    //     if(clouds[i].mesh.position.z==4000){
+    //
+    //         scene.remove(clouds[i].mesh);
+    //         clouds.splice(i,1)
+    //     }
+    //
+    // }
 
     //console.log(clouds.length)
 
@@ -457,16 +536,16 @@ function render() {
     //
     // }
 
-    TWEEN.update();
+    //TWEEN.update();
 
    // plane.rotation.y += 2-Math.random()*.02
-    document.getElementById('txt').innerHTML="x:"+Math.floor(accGravity.x)+"y:"+Math.floor(accGravity.y)+"id=13"
+    //document.getElementById('txt').innerHTML="x:"+Math.floor(accGravity.x)+"y:"+Math.floor(accGravity.y)+"id=13"
     plane.position.x+=(accGravity.x/10)
 
     //plane.position.y+=(Math.random()*(0.05))
     // plane.position.y+=1+Math.random()*-2
 
-    plane.rotation.set(.3,-4.7+accGravity.x/10,0)
+    //plane.rotation.set(.3,-4.7+accGravity.x/10,0)
 
     renderer.render(scene, camera);
 
