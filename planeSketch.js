@@ -661,9 +661,9 @@ function render() {
 
    // plane.rotation.y += 2-Math.random()*.02
     //document.getElementById('txt').innerHTML="x:"+Math.floor(accGravity.x)+"y:"+Math.floor(accGravity.y)+"id=13"
-   // plane.position.x+=(accGravity.x/10)
+    plane.position.x+=(accGravity.x/10)
     mesh.position.x+=(-accGravity.x/5)
-    mesh.rotation.z+=(-accGravity.x/10) * Math.PI / 180;
+    plane.rotation.z+=(-accGravity.x/10) * Math.PI / 180;
     //camera.rotation.z +=(-accGravity.x/5) * Math.PI / 180;
 
     //plane.position.y+=(Math.random()*(0.05))
