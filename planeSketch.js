@@ -713,7 +713,7 @@ function makeRandomCube() {
     //box.material.color.setHex(0xff0000);
 
     box.position.x = getRandomArbitrary(-250, 250);
-    box.position.y = 1 + getRandomInt(1, 3) * 50 / 2;
+    //box.position.y = 1 + getRandomInt(1, 3) * 50 / 2;
     box.position.z = getRandomArbitrary(-800, -1200);
     cubes.push(box);
     box.name = "box_" + id;
