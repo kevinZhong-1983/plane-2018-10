@@ -527,7 +527,9 @@ function animate() {
         console.log("Crash");
         if (crashId !== lastCrashId) {
             //score -= 100;
+            vv++
             lastCrashId = crashId;
+            document.getElementById("message").innerHTML=vv
         }
 
         //document.getElementById('explode_sound').play()
@@ -583,7 +585,7 @@ function animate() {
     //console.log(mesh.position.z)
     render();
 
-    vv++
+
 
     // if(vv==20){
     //
