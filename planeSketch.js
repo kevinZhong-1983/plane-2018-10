@@ -533,7 +533,7 @@ function animate() {
         //document.getElementById('explode_sound').play()
     } else {
         //            message.innerText = "Safe";
-        plane.material.color.setHex(0x00ff00);
+        plane.material.color.setHex(0x694300);
     }
 
     if (Math.random() < 0.03 && cubes.length < 30) {
@@ -549,6 +549,7 @@ function animate() {
             collideMeshList.splice(i, 1);
         } else {
             cubes[i].position.z += 10;
+
         }
         //                renderer.render(scene, camera);
     }
@@ -558,6 +559,11 @@ function animate() {
 
 
 
+    // smallSphere.position.set(
+    //     Math.cos( timer * 0.1 ) * 30,
+    //     Math.abs( Math.cos( timer * 0.2 ) ) * 20 + 5,
+    //     Math.sin( timer * 0.1 ) * 30
+    // );
 
 
 
@@ -661,9 +667,9 @@ function render() {
 
    // plane.rotation.y += 2-Math.random()*.02
     //document.getElementById('txt').innerHTML="x:"+Math.floor(accGravity.x)+"y:"+Math.floor(accGravity.y)+"id=13"
-    plane.position.x+=(accGravity.x/10)
+    plane.position.x+=(accGravity.x)
     mesh.position.x+=(-accGravity.x/5)
-    plane.rotation.x+=(-accGravity.x/10) * Math.PI / 180;
+    plane.rotation.x+=(accGravity.x/10) * Math.PI / 180;
     //camera.rotation.z +=(-accGravity.x/5) * Math.PI / 180;
 
     //plane.position.y+=(Math.random()*(0.05))
@@ -690,23 +696,24 @@ function getRandomInt(min, max) {
 
 
 function makeRandomCube() {
-    var a = 1 * 50,
-        b = getRandomInt(1, 3) * 50,
-        c = 1 * 50;
-    var geometry = new THREE.CubeGeometry(a, b, c);
-    var material = new THREE.MeshBasicMaterial({
-        color: Math.random() * 0xffffff,
-        //size: 3
-    });
+    // var a = 1 * 50,
+    //     b = getRandomInt(1, 3) * 50,
+    //     c = 1 * 50;
+    var geometry = new THREE.IcosahedronBufferGeometry( 15, 0 );
+    // var material = new THREE.MeshBasicMaterial({
+    //     color: Math.random() * 0xffffff,
+    //     //size: 3
+    // });
+    var material = new THREE.MeshPhongMaterial( { color: 0x0dc3b4, emissive: 0x333333, flatShading: true } )
 
 
-    var object = new THREE.Mesh(geometry, material);
-    var box = new THREE.BoxHelper(object);
-    //            box.material.color.setHex(Math.random() * 0xffffff);
-    box.material.color.setHex(0xff0000);
+    var box = new THREE.Mesh(geometry, material);
+    //var box = new THREE.BoxHelper(object,0x0dc3b4);
+    box.material.color.setHex(Math.random() * 0xffffff);
+    //box.material.color.setHex(0xff0000);
 
     box.position.x = getRandomArbitrary(-250, 250);
-    box.position.y = 1 + b / 2;
+    box.position.y = 1 + getRandomInt(1, 3) * 50 / 2;
     box.position.z = getRandomArbitrary(-800, -1200);
     cubes.push(box);
     box.name = "box_" + id;
@@ -714,4 +721,11 @@ function makeRandomCube() {
     collideMeshList.push(box);
 
     scene.add(box);
+
+    // var sphereGeometry = new THREE.SphereGeometry(7, 25, 25);
+    // var sphereMaterial = new THREE.MeshLambertMaterial({color: 0x7777ff});
+    // var sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+
+
+
 }
