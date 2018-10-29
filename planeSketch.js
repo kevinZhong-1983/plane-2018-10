@@ -307,7 +307,8 @@ function init() {
         fragmentShader: document.getElementById( 'fs' ).textContent,
         depthWrite: false,
         depthTest: true,
-        transparent: true
+        transparent: true,
+        alpha: 0.5
 
     } );
 
@@ -441,9 +442,9 @@ function init() {
 
 
     // Controls
-    var controls = new THREE.OrbitControls( camera, renderer.domElement );
-    controls.target.set( 0, 1, 0 );
-    controls.update();
+    // var controls = new THREE.OrbitControls( camera, renderer.domElement );
+    // controls.target.set( 0, 1, 0 );
+    // controls.update();
 }
 
 function onWindowResize() {
@@ -529,7 +530,7 @@ function animate() {
             //score -= 100;
             vv++
             lastCrashId = crashId;
-            document.getElementById("message").innerHTML=vv
+            document.getElementById("message").innerHTML=vv;
         }
 
         //document.getElementById('explode_sound').play()
@@ -717,6 +718,7 @@ function makeRandomCube() {
     box.position.x = getRandomArbitrary(-250, 250);
     //box.position.y = 1 + getRandomInt(1, 3) * 50 / 2;
     box.position.z = getRandomArbitrary(-800, -1200);
+    box.scale.set(Math.random()*3)
     cubes.push(box);
     box.name = "box_" + id;
     id++;
