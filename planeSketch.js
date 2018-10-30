@@ -531,6 +531,12 @@ function animate() {
             vv++
             lastCrashId = crashId;
             document.getElementById("message").innerHTML=vv;
+
+            plane.position.z =7850;
+            plane.position.z =7900;
+
+
+
         }
 
         //document.getElementById('explode_sound').play()
@@ -666,13 +672,13 @@ function render() {
     //
     // }
 
-    //TWEEN.update();
+    TWEEN.update();
 
    // plane.rotation.y += 2-Math.random()*.02
     //document.getElementById('txt').innerHTML="x:"+Math.floor(accGravity.x)+"y:"+Math.floor(accGravity.y)+"id=13"
     plane.position.x+=(accGravity.x/5)
     mesh.position.x+=(-accGravity.x/5)
-    plane.rotation.y+=(accGravity.x/10) * Math.PI / 180;
+    //plane.rotation.y+=(accGravity.x/10) * Math.PI / 180;
     //camera.rotation.z +=(-accGravity.x/5) * Math.PI / 180;
 
     //plane.position.y+=(Math.random()*(0.05))
