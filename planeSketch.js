@@ -672,7 +672,7 @@ function render() {
     //
     // }
 
-    TWEEN.update();
+    //TWEEN.update();
 
    // plane.rotation.y += 2-Math.random()*.02
     //document.getElementById('txt').innerHTML="x:"+Math.floor(accGravity.x)+"y:"+Math.floor(accGravity.y)+"id=13"
