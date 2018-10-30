@@ -532,8 +532,8 @@ function animate() {
             lastCrashId = crashId;
             document.getElementById("message").innerHTML=vv;
 
-            plane.position.z =7850;
-            plane.position.z =7900;
+           // plane.position.z =7850;
+           // plane.position.z =7900;
 
 
 
@@ -705,6 +705,7 @@ function getRandomInt(min, max) {
 
 
 function makeRandomCube() {
+
     // var a = 1 * 50,
     //     b = getRandomInt(1, 3) * 50,
     //     c = 1 * 50;
@@ -724,7 +725,7 @@ function makeRandomCube() {
     box.position.x = getRandomArbitrary(-250, 250);
     //box.position.y = 1 + getRandomInt(1, 3) * 50 / 2;
     box.position.z = getRandomArbitrary(-800, -1200);
-    box.scale.set(Math.random()*3)
+    box.scale.x = box.scale.y = Math.random() * Math.random() * 2 + 0.5;
     cubes.push(box);
     box.name = "box_" + id;
     id++;
