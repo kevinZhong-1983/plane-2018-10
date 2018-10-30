@@ -532,8 +532,9 @@ function animate() {
             lastCrashId = crashId;
             document.getElementById("message").innerHTML=vv;
 
-           plane.position.z =7850;
+           plane.position.z =7950;
            plane.position.z =7900;
+           plane.position.z =7950;
 
 
 
@@ -543,6 +544,7 @@ function animate() {
     } else {
         //            message.innerText = "Safe";
         plane.material.color.setHex(0x694300);
+        plane.position.z =7900;
     }
 
     if (Math.random() < 0.03 && cubes.length < 30) {
