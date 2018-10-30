@@ -307,8 +307,9 @@ function init() {
         fragmentShader: document.getElementById( 'fs' ).textContent,
         depthWrite: false,
         depthTest: true,
+        opacity:0.3,
         transparent: true,
-        opacity:0.3
+
 
     } );
 
