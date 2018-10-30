@@ -308,7 +308,7 @@ function init() {
         depthWrite: false,
         depthTest: true,
         transparent: true,
-        alpha: 0.5
+        opacity:0.3
 
     } );
 
@@ -532,9 +532,9 @@ function animate() {
             lastCrashId = crashId;
             document.getElementById("message").innerHTML=vv;
 
-           plane.position.z =7950;
-           plane.position.z =7900;
-           plane.position.z =7950;
+            plane.position.y =10;
+            plane.position.y =-10;
+
 
 
 
@@ -544,7 +544,8 @@ function animate() {
     } else {
         //            message.innerText = "Safe";
         plane.material.color.setHex(0x694300);
-        plane.position.z =7900;
+        plane.position.y =0;
+
     }
 
     if (Math.random() < 0.03 && cubes.length < 30) {
