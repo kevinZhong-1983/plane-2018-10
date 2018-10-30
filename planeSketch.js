@@ -532,8 +532,8 @@ function animate() {
             lastCrashId = crashId;
             document.getElementById("message").innerHTML=vv;
 
-           // plane.position.z =7850;
-           // plane.position.z =7900;
+           plane.position.z =7850;
+           plane.position.z =7900;
 
 
 
