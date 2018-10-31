@@ -230,6 +230,7 @@ var crashId = " ";
 var lastCrashId = " ";
 var collideMeshList = [];
 var cubes = [];
+var gg
 
 init();
 //animate();
@@ -534,8 +535,11 @@ function animate() {
             lastCrashId = crashId;
             document.getElementById("message").innerHTML=vv;
 
-            camera.rotation.z =0.2 * Math.PI / 180;
-            camera.rotation.z =-0.2 * Math.PI / 180;
+            gg=8000
+            plane.position.z+=(gg-plane.position.z)*0.5
+
+
+
 
         }
 
@@ -544,7 +548,10 @@ function animate() {
     } else {
         //            message.innerText = "Safe";
         plane.material.color.setHex(0x694300);
-        camera.rotation.z =8000;
+
+        gg=7900
+        plane.position.z+=(gg-plane.position.z)*0.5
+
 
     }
 
