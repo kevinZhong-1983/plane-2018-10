@@ -686,7 +686,8 @@ function render() {
     plane.position.x+=(accGravity.x/5)
     mesh.position.x+=(-accGravity.x/5)
 
-    plane.rotateX(Math.PI/accGravity.x)
+    angle_num=(Math.PI/accGravity.x-plane.rotateX)/10
+    plane.rotateX(angle_num)
 
 
     //plane.rotation.y+=(accGravity.x/10) * Math.PI / 180;
