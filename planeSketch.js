@@ -301,7 +301,6 @@ function init() {
             "fogColor" : { type: "c", value: fog.color },
             "fogNear" : { type: "f", value: fog.near },
             "fogFar" : { type: "f", value: fog.far },
-            alpha: {type: 'f', value: 0.6},
 
         },
         vertexShader: document.getElementById( 'vs' ).textContent,
@@ -322,6 +321,7 @@ function init() {
         cloud.position.z = i;
         cloud.rotation.z = Math.random() * Math.PI;
         cloud.scale.x = cloud.scale.y = Math.random() * Math.random() * 1.5 + 0.5;
+        cloud.alpha=Math.random() *0.6
 
 
         cloud.updateMatrix();
