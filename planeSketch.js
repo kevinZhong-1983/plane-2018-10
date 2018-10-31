@@ -291,6 +291,7 @@ function init() {
     texture.magFilter = THREE.LinearMipMapLinearFilter;
     texture.minFilter = THREE.LinearMipMapLinearFilter;
 
+
     var fog = new THREE.Fog( 0x4584b4, - 100, 3000 );
 
     material = new THREE.ShaderMaterial( {
@@ -305,9 +306,10 @@ function init() {
         },
         vertexShader: document.getElementById( 'vs' ).textContent,
         fragmentShader: document.getElementById( 'fs' ).textContent,
-        depthWrite: false,
+        depthWrite: true,
         depthTest: true,
         transparent: true,
+        opacity:Math.random()*0.8
 
 
     } );
@@ -321,7 +323,6 @@ function init() {
         cloud.position.z = i;
         cloud.rotation.z = Math.random() * Math.PI;
         cloud.scale.x = cloud.scale.y = Math.random() * Math.random() * 1.5 + 0.5;
-        cloud.alpha=Math.random() *0.6
 
 
         cloud.updateMatrix();
@@ -331,6 +332,7 @@ function init() {
     }
 
     mesh = new THREE.Mesh( geometry, material );
+
     //mesh.position.z = 0;
     scene.add( mesh );
 
@@ -482,7 +484,6 @@ function animate() {
     plane.position.z =7900;
 
 
-
     // clearText()
     //
     // //碰撞
@@ -533,9 +534,8 @@ function animate() {
             lastCrashId = crashId;
             document.getElementById("message").innerHTML=vv;
 
-            plane.position.y =10;
-            plane.position.y =-10;
-
+            camera.rotation.z =0.2 * Math.PI / 180;
+            camera.rotation.z =-0.2 * Math.PI / 180;
 
         }
 
@@ -544,7 +544,7 @@ function animate() {
     } else {
         //            message.innerText = "Safe";
         plane.material.color.setHex(0x694300);
-        plane.position.y =0;
+        camera.rotation.z =8000;
 
     }
 
@@ -672,7 +672,7 @@ function render() {
     plane.position.x+=(accGravity.x/5)
     mesh.position.x+=(-accGravity.x/5)
     //plane.rotation.y+=(accGravity.x/10) * Math.PI / 180;
-    //camera.rotation.z +=(-accGravity.x/5) * Math.PI / 180;
+
 
     //plane.position.y+=(Math.random()*(0.05))
     // plane.position.y+=1+Math.random()*-2
