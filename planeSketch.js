@@ -536,8 +536,8 @@ function animate() {
             document.getElementById("message").innerHTML=vv;
 
             gg=8000
-            plane.position.z+=(gg-plane.position.z)*0.005
-
+            plane.position.z+=(gg-plane.position.z)*0.5
+            plane.rotation.z+=(100-plane.position.z)*0.5
 
 
 
