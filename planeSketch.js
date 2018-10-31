@@ -536,7 +536,7 @@ function animate() {
             document.getElementById("message").innerHTML=vv;
 
             gg=8000
-            plane.position.z+=(gg-plane.position.z)*0.5
+            plane.position.z+=(gg-plane.position.z)*0.005
 
 
 
@@ -550,7 +550,7 @@ function animate() {
         plane.material.color.setHex(0x694300);
 
         gg=7900
-        plane.position.z+=(gg-plane.position.z)*0.5
+        plane.position.z+=(gg-plane.position.z)*0.005
 
 
     }
