@@ -307,7 +307,7 @@ function init() {
         fragmentShader: document.getElementById( 'fs' ).textContent,
         depthWrite: false,
         depthTest: true,
-        opacity:0.3,
+        opacity:0,
         transparent: true,
 
 
@@ -537,11 +537,10 @@ function animate() {
             plane.position.y =-10;
 
 
-
-
         }
 
         //document.getElementById('explode_sound').play()
+
     } else {
         //            message.innerText = "Safe";
         plane.material.color.setHex(0x694300);
@@ -577,16 +576,6 @@ function animate() {
     //     Math.abs( Math.cos( timer * 0.2 ) ) * 20 + 5,
     //     Math.sin( timer * 0.1 ) * 30
     // );
-
-
-
-
-
-
-
-
-
-
 
 
 
