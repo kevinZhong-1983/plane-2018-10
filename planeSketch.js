@@ -537,6 +537,7 @@ function animate() {
 
             gg=8000
             plane.position.z+=(gg-plane.position.z)*0.5
+            plane.position.y+=(Math.random()*50-plane.position.y)*0.5
             plane.rotation.z+=(100-plane.position.z)*0.5
 
 
@@ -549,9 +550,9 @@ function animate() {
         //            message.innerText = "Safe";
         plane.material.color.setHex(0x694300);
 
-        gg=7900
-        plane.position.z+=(gg-plane.position.z)*0.005
+        plane.position.z=7900
         plane.rotation.z=0
+        plane.position.y=0
 
 
     }
@@ -567,7 +568,9 @@ function animate() {
             scene.remove(cubes[i]);
             cubes.splice(i, 1);
             collideMeshList.splice(i, 1);
+
         } else {
+
             cubes[i].position.z += 10;
 
         }
