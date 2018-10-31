@@ -551,7 +551,7 @@ function animate() {
 
         gg=7900
         plane.position.z+=(gg-plane.position.z)*0.005
-        plane.rotation.z+=(0-plane.position.z)*0.5
+        plane.rotation.z=0
 
 
     }
