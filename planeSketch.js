@@ -539,7 +539,7 @@ function animate() {
             //plane.position.z+=(gg-plane.position.z)*0.5
             //plane.position.y+=(Math.random()*50-plane.position.y)*0.5
            // plane.rotation.z+=(100-plane.position.z)*0.5
-            plane.rotateX(Math.PI/4);//绕x轴旋转π/4
+            //plane.rotateX(Math.PI/4);//绕x轴旋转π/4
 
 
 
@@ -685,6 +685,10 @@ function render() {
     //document.getElementById('txt').innerHTML="x:"+Math.floor(accGravity.x)+"y:"+Math.floor(accGravity.y)+"id=13"
     plane.position.x+=(accGravity.x/5)
     mesh.position.x+=(-accGravity.x/5)
+
+    plane.rotateX(Math.PI/accGravity.x)
+
+
     //plane.rotation.y+=(accGravity.x/10) * Math.PI / 180;
 
 
