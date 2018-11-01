@@ -542,7 +542,7 @@ function animate() {
             //plane.position.z+=(gg-plane.position.z)*0.5
             //plane.position.y+=(Math.random()*50-plane.position.y)*0.5
            // plane.rotation.z+=(100-plane.position.z)*0.5
-            //plane.rotateX(Math.PI/4);//绕x轴旋转π/4
+            plane.rotateX(Math.PI/360);//绕x轴旋转π/4
 
 
 
@@ -554,7 +554,7 @@ function animate() {
         //            message.innerText = "Safe";
         plane.material.color.setHex(0x694300);
 
-        //plane.rotateX(0);//绕x轴旋转π/4
+        plane.rotateX(0);//绕x轴旋转π/4
 
        // plane.position.z=7900
         //plane.rotation.z=0
