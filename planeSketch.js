@@ -542,7 +542,10 @@ function animate() {
             //plane.position.z+=(gg-plane.position.z)*0.5
             //plane.position.y+=(Math.random()*50-plane.position.y)*0.5
            // plane.rotation.z+=(100-plane.position.z)*0.5
-            plane.rotateX(Math.PI/360);//绕x轴旋转π/4
+            //plane.rotateX(Math.PI/360);//绕x轴旋转π/4
+            new TWEEN.Tween( plane )
+                        .to( { rotateX:Math.PI/2}, 5000 )
+                        .start();
 
 
 
@@ -554,7 +557,9 @@ function animate() {
         //            message.innerText = "Safe";
         plane.material.color.setHex(0x694300);
 
-        plane.rotateX(0);//绕x轴旋转π/4
+        new TWEEN.Tween( plane )
+            .to( { rotateX:0}, 5000 )
+            .start();
 
        // plane.position.z=7900
         //plane.rotation.z=0
@@ -682,7 +687,7 @@ function render() {
     //
     // }
 
-    //TWEEN.update();
+    TWEEN.update();
 
    // plane.rotation.y += 2-Math.random()*.02
     //document.getElementById('txt').innerHTML="x:"+Math.floor(accGravity.x)+"y:"+Math.floor(accGravity.y)+"id=13"
