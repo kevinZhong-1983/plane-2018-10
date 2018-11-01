@@ -557,9 +557,9 @@ function animate() {
         //            message.innerText = "Safe";
         plane.material.color.setHex(0x694300);
 
-        new TWEEN.Tween( plane.position )
-            .to( { y:0}, 5000 )
-            .start();
+        // new TWEEN.Tween( plane.position )
+        //     .to( { y:0}, 5000 )
+        //     .start();
 
        // plane.position.z=7900
         //plane.rotation.z=0
