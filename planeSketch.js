@@ -549,7 +549,7 @@ function animate() {
                         .onComplete(function(){
 
                             new TWEEN.Tween( plane.position )
-                                .to( { y:0}, 100 )
+                                .to( { y:0}, 500 )
                                 .start()
 
             });
