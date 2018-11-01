@@ -309,7 +309,6 @@ function init() {
         fragmentShader: document.getElementById( 'fs' ).textContent,
         depthWrite: true,
         depthTest: false,
-        opacity:0.5,
         transparent: true,
 
 
@@ -325,6 +324,7 @@ function init() {
         cloud.position.z = i;
         cloud.rotation.z = Math.random() * Math.PI;
         cloud.scale.x = cloud.scale.y = Math.random() * Math.random() * 1.5 + 0.5;
+        cloud.alpha=Math.random() *0.8
 
 
         cloud.updateMatrix();
