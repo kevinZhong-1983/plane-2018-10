@@ -303,14 +303,13 @@ function init() {
             "fogColor" : { type: "c", value: fog.color },
             "fogNear" : { type: "f", value: fog.near },
             "fogFar" : { type: "f", value: fog.far },
-            "alpha": {type: 'f', value: 0.6},
 
         },
         vertexShader: document.getElementById( 'vs' ).textContent,
         fragmentShader: document.getElementById( 'fs' ).textContent,
-        depthWrite: true,
-        depthTest: true,
-        //opacity:0.2,
+        depthWrite: false,
+        depthTest: false,
+        opacity:0.5,
         transparent: true,
 
 
