@@ -530,14 +530,14 @@ function animate() {
 
     if (crash) {
         //            message.innerText = "crash";
-        plane.material.color.setHex(0x346386);
+
         console.log("Crash");
         if (crashId !== lastCrashId) {
             //score -= 100;
             vv++
             lastCrashId = crashId;
             document.getElementById("message").innerHTML=vv;
-
+            plane.material.color.setHex(0x346386);
             //gg=8000
             //plane.position.z+=(gg-plane.position.z)*0.5
             //plane.position.y+=(Math.random()*50-plane.position.y)*0.5
