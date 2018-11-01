@@ -546,12 +546,11 @@ function animate() {
             new TWEEN.Tween( plane.position )
                         .to( { y:-20}, 1000 )
                         .start();
-                        .stop(function() {
+                        .stop(function(){
 
-                              plane.position.y=0
+                            this.y=0
 
-                         });
-
+            });
 
 
         }
