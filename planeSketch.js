@@ -310,7 +310,7 @@ function init() {
         depthWrite: true,
         depthTest: true,
         transparent: true,
-
+        opacity:0.6
 
 
     } );
@@ -324,7 +324,6 @@ function init() {
         cloud.position.z = i;
         cloud.rotation.z = Math.random() * Math.PI;
         cloud.scale.x = cloud.scale.y = Math.random() * Math.random() * 1.5 + 0.5;
-        cloud.alpha=Math.random() *0.2
 
 
         cloud.updateMatrix();
