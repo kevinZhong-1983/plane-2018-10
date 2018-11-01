@@ -310,7 +310,7 @@ function init() {
         opacity:0.6,
         depthWrite: true,
         depthTest: true,
-        transparent: true,
+        transparent: false,
 
 
 
