@@ -537,14 +537,15 @@ function animate() {
             vv++
             lastCrashId = crashId;
             document.getElementById("message").innerHTML=vv;
-            plane.material.color.setHex(0x346386);
+            //plane.material.color.setHex(0x346386);
+            planeMat.material.color.setHex(0x346386)
             //gg=8000
             //plane.position.z+=(gg-plane.position.z)*0.5
             //plane.position.y+=(Math.random()*50-plane.position.y)*0.5
            // plane.rotation.z+=(100-plane.position.z)*0.5
             //plane.rotateX(Math.PI/360);//绕x轴旋转π/4
             new TWEEN.Tween( plane.position )
-                        .to( { y:-20}, 500 )
+                        .to( { y:-10}, 500 )
                         .start()
                         .onComplete(function(){
 
@@ -561,7 +562,8 @@ function animate() {
 
     } else {
         //            message.innerText = "Safe";
-        plane.material.color.setHex(0x694300);
+        //plane.material.color.setHex(0x694300);
+        planeMat.material.color.setHex(0x694300)
 
         // new TWEEN.Tween( plane.position )
         //     .to( { y:0}, 5000 )
