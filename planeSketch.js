@@ -530,7 +530,7 @@ function animate() {
 
     if (crash) {
         //            message.innerText = "crash";
-
+        plane.material.color.setHex(0x346386)
         console.log("Crash");
         if (crashId !== lastCrashId) {
             //score -= 100;
@@ -538,7 +538,7 @@ function animate() {
             lastCrashId = crashId;
             document.getElementById("message").innerHTML=vv;
             //plane.material.color.setHex(0x346386);
-            planeMat.material.color.setHex(0x346386)
+
             //gg=8000
             //plane.position.z+=(gg-plane.position.z)*0.5
             //plane.position.y+=(Math.random()*50-plane.position.y)*0.5
@@ -553,6 +553,8 @@ function animate() {
                                 .to( { y:0}, 500 )
                                 .start()
 
+                            plane.material.color.setHex(0x694300)
+
             });
 
 
@@ -563,7 +565,7 @@ function animate() {
     } else {
         //            message.innerText = "Safe";
         //plane.material.color.setHex(0x694300);
-        planeMat.material.color.setHex(0x694300)
+
 
         // new TWEEN.Tween( plane.position )
         //     .to( { y:0}, 5000 )
