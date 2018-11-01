@@ -688,7 +688,7 @@ function render() {
     //document.getElementById('txt').innerHTML="x:"+Math.floor(accGravity.x)+"y:"+Math.floor(accGravity.y)+"id=13"
     plane.position.x+=(accGravity.x/5)
     mesh.position.x+=(-accGravity.x/5)
-    plane.rotateX(accGravity.x/10)
+    plane.rotateX(accGravity.x/100)
 
 
 
