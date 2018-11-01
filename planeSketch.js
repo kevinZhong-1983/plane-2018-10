@@ -530,7 +530,7 @@ function animate() {
 
     if (crash) {
         //            message.innerText = "crash";
-        plane.material.color.setHex(0x346386)
+        plane.material.color.setHex(0xff0000)
         console.log("Crash");
         if (crashId !== lastCrashId) {
             //score -= 100;
