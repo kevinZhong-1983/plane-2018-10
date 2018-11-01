@@ -544,8 +544,13 @@ function animate() {
            // plane.rotation.z+=(100-plane.position.z)*0.5
             //plane.rotateX(Math.PI/360);//绕x轴旋转π/4
             new TWEEN.Tween( plane.position )
-                        .to( { y:100}, 5000 )
+                        .to( { y:-20}, 1000 )
                         .start();
+                        .stop(function() {
+
+                              plane.position.y=0
+
+                         });
 
 
 
