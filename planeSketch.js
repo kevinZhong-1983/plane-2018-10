@@ -308,7 +308,7 @@ function init() {
         vertexShader: document.getElementById( 'vs' ).textContent,
         fragmentShader: document.getElementById( 'fs' ).textContent,
         depthWrite: true,
-        depthTest: false,
+        depthTest: true,
         transparent: true,
 
 
@@ -324,7 +324,7 @@ function init() {
         cloud.position.z = i;
         cloud.rotation.z = Math.random() * Math.PI;
         cloud.scale.x = cloud.scale.y = Math.random() * Math.random() * 1.5 + 0.5;
-        cloud.alpha=Math.random() *0.8
+        cloud.alpha=Math.random() *0.2
 
 
         cloud.updateMatrix();
