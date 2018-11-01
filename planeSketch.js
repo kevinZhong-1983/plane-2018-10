@@ -686,7 +686,7 @@ function render() {
     plane.position.x+=(accGravity.x/5)
     mesh.position.x+=(-accGravity.x/5)
 
-    angle_num=Math.PI-accGravity.x
+    angle_num=Math.PI/8
     var axis = new THREE.Vector3(0,0,0);
     //plane.rotateX(angle_num)
 
