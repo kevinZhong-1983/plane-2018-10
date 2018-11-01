@@ -548,7 +548,9 @@ function animate() {
                         .start()
                         .onComplete(function(){
 
-                            this.y=0
+                            new TWEEN.Tween( plane.position )
+                                .to( { y:0}, 1000 )
+                                .start()
 
             });
 
