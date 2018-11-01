@@ -485,6 +485,9 @@ function animate() {
     plane.position.z =7900;
 
 
+
+
+
     // clearText()
     //
     // //碰撞
@@ -685,12 +688,8 @@ function render() {
     //document.getElementById('txt').innerHTML="x:"+Math.floor(accGravity.x)+"y:"+Math.floor(accGravity.y)+"id=13"
     plane.position.x+=(accGravity.x/5)
     mesh.position.x+=(-accGravity.x/5)
+    plane.rotateY(accGravity.x/10)
 
-    angle_num=Math.PI/8
-    var axis = new THREE.Vector3(0,1,0);
-    //plane.rotateX(angle_num)
-
-    plane.rotateOnAxis(axis,angle_num)
 
 
 
