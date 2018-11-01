@@ -307,8 +307,8 @@ function init() {
         },
         vertexShader: document.getElementById( 'vs' ).textContent,
         fragmentShader: document.getElementById( 'fs' ).textContent,
-        depthWrite: false,
-        depthTest: true,
+        depthWrite: true,
+        depthTest: false,
         opacity:0.5,
         transparent: true,
 
