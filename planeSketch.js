@@ -553,7 +553,7 @@ function animate() {
                                 .to( { y:0}, 500 )
                                 .start()
 
-                            plane.material.color.setHex(0x694300)
+                            plane.material.color.setHex(0xCCCCFF)
 
             });
 
