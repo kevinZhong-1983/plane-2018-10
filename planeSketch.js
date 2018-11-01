@@ -543,8 +543,8 @@ function animate() {
             //plane.position.y+=(Math.random()*50-plane.position.y)*0.5
            // plane.rotation.z+=(100-plane.position.z)*0.5
             //plane.rotateX(Math.PI/360);//绕x轴旋转π/4
-            new TWEEN.Tween( plane )
-                        .to( { rotateX:Math.PI/2}, 5000 )
+            new TWEEN.Tween( plane.position )
+                        .to( { y:100}, 5000 )
                         .start();
 
 
@@ -557,8 +557,8 @@ function animate() {
         //            message.innerText = "Safe";
         plane.material.color.setHex(0x694300);
 
-        new TWEEN.Tween( plane )
-            .to( { rotateX:0}, 5000 )
+        new TWEEN.Tween( plane.position )
+            .to( { y:0}, 5000 )
             .start();
 
        // plane.position.z=7900
